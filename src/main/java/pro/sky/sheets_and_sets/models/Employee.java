@@ -1,4 +1,4 @@
-package pro.sky.sheets_and_sets;
+package pro.sky.sheets_and_sets.models;
 import java.util.Objects;
 
 public class Employee {

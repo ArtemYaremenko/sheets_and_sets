@@ -2,8 +2,9 @@ package pro.sky.sheets_and_sets.controller;
 
 import org.springframework.web.bind.annotation.*;
 import pro.sky.sheets_and_sets.service.EmployeeService;
-import pro.sky.sheets_and_sets.Employee;
+import pro.sky.sheets_and_sets.models.Employee;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -16,30 +17,24 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @ResponseStatus
     @GetMapping("/add")
-    public String add(@RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName) {
-        employeeService.addEmployee(firstName, lastName);
-        return "Добавлен новый сотрудник - " + new Employee(firstName, lastName);
+    public Employee add(@RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName) {
+       return employeeService.addEmployee(firstName, lastName);
     }
 
-    @ResponseStatus
     @GetMapping("/remove")
     public Employee remove(@RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName) {
-        employeeService.removeEmployee(firstName, lastName);
-        return new Employee(firstName, lastName);
+        return employeeService.removeEmployee(firstName, lastName);
     }
 
-    @ResponseStatus
     @GetMapping("/find")
     public Employee find(@RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName) {
-        employeeService.findEmployee(firstName, lastName);
-        return new Employee(firstName, lastName);
+        return employeeService.findEmployee(firstName, lastName);
     }
 
-    @ResponseStatus
-    @GetMapping("/employeebook")
-    public List employeeBook() {
+
+    @GetMapping
+    public Collection employeeBook() {
         return employeeService.getEmployees();
     }
 }
